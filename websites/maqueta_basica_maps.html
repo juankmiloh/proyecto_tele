@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  	<title>INDEX / POSICIÓN</title>
+  	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  	<script src="js/jquery.js"></script>
+  	<script src="js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  	<style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5TqLnWHMFlFSxufxXOEJK7jp-J3_isJY&signed_in=true&libraries=places&callback=initMap" async defer></script>
+  	<script>
+		$(document).ready(function(){ 
+			//alert("hola mundo");
+		});
+		
+		function initMap() {
+			var geocoder = new google.maps.Geocoder;
+			var infowindow = new google.maps.InfoWindow;
+			var marcadores = [[],[]];
+
+			var latitud = 4.6827205;
+		    var longitud = -74.1395357;
+
+		    var latlng = new google.maps.LatLng(latitud, longitud);
+		    var mapOptions = {
+		      zoom: 13,
+		      center: latlng,
+		      mapTypeId: google.maps.MapTypeId.ROADMAP,
+		    }
+		    var map = new google.maps.Map(document.getElementById('map'), mapOptions); 
+
+		    marcadores[0][0] = latitud;
+		    marcadores[0][1] = longitud; 
+		    //alert(marcadores);
+		    setMarkers(map, marcadores); 
+
+		    function setMarkers(map, marcadores) {
+		    for (var i = 0; i < marcadores.length; i++) {
+		      var myLatLng = new google.maps.LatLng(marcadores[i][0], marcadores[i][1]);
+		      
+		      var marker = new google.maps.Marker({
+		        position: myLatLng,
+		        icon: 'http://findicons.com/files/icons/1580/devine_icons_part_2/48/home.png',
+		        animation: google.maps.Animation.drop,//bounce
+		        map: map,
+		      });
+		      (function(i, marker) {
+		        geocoder.geocode({'location': myLatLng}, function(results, status) {
+		          google.maps.event.addListener(marker,'click',function() {      
+		            var markerLatLng = marker.getPosition();    
+		            infowindow.setContent(
+		              '<br><b><center>DESCRIPCIÓN DEL INMUEBLE</center></b><br>'+ 
+		              '<b>BARRIO: </b>' + results[1].formatted_address +  
+		              '<br><b>DIRECCIÓN: </b>' + results[0].formatted_address +
+		              '<br><b>LATITUD: </b>' + marker.getPosition().lat() +
+		              '<br><b>LONGITUD: </b>' + markerLatLng.lng());
+		            infowindow.open(map, marker);         
+		          });
+		        });
+		      })(i, marker);        
+		    }
+		  };
+		}
+	</script> 
+</head>
+<body>
+    <div id="map"></div>
+</body>
+</html>

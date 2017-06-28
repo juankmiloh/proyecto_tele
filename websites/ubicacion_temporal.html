@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  	<title>INDEX / POSICIÓN</title>
+  	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  	<script src="../js/jquery.js"></script>
+  	<script src="../js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="../estilos_css/estilos_ubicacion_temporal.css">
+  	<script type="text/javascript">
+		$(document).ready(function(){ 
+            setTimeout('recargar()',5000);
+            $('.modal').modal();                      // initialized with defaults
+			$('.modal').modal({ keyboard: false });   // initialized with no keyboard
+			$('.modal').modal('show');                // initializes and invokes show immediately
+        });
+        function recargar(){
+			location.href="./ubicacion_persona.html";
+		}
+	</script>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+        <div class="modal fade bs-example-modal-sm fijo" tabindex="-57" role="dialog" aria-labelledby="mySmallModalLabel">
+	        <div class="modal-dialog modal-sm" role="document">
+	            <div class="modal-content">
+	                <center>
+	                    <br>
+	                    <img src="../images/loading.gif" class="img-responsive banner" alt="Loading...">
+	                    <br>
+	                    <label>OBTENIENDO UBICACIÓN...</label>
+	                </center>
+	            </div>
+	        </div>
+	    </div>
+		<hr>
+    	<center>
+	     	<div class="row">
+		        <div class="col-xs-12 col-sm-12 col-md-12">
+		        	<h1>POSICIÓN DEL PACIENTE</h1>
+		        </div>
+		    </div>
+	        <hr>
+		</center>
+    </div>
+</body>
+</html>
